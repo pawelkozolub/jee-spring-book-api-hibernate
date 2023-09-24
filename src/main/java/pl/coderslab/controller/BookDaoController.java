@@ -22,6 +22,6 @@ public class BookDaoController {
         book.setTitle("Thinking in Java");
         book.setAuthor("Bruce Eckel");
         bookDao.save(book);
-        return "Sample book with id: " + book.getId();
+        return "Sample book added with id: " + book.getId();
     }
 }
