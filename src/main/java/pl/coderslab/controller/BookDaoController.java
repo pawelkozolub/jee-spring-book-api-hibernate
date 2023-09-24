@@ -1,6 +1,7 @@
 package pl.coderslab.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.coderslab.model.Book;
@@ -15,6 +16,30 @@ public class BookDaoController {
         this.bookDao = bookDao;
     }
 
+    @RequestMapping("/book/list")
+    @ResponseBody
+    public String getAll() {
+        return bookDao.findAll().toString();
+    }
+
+    @RequestMapping("/book/{id}")
+    @ResponseBody
+    public String getBook(@PathVariable(name = "id") Long id) {
+        return bookDao.findById(id).toString();
+    }
+
+    @RequestMapping("/book/update/{id}/{title}/{author}")
+    @ResponseBody
+    public String updateTitleAuthor(@PathVariable(name = "id") Long id,
+                                    @PathVariable(name = "title") String title,
+                                    @PathVariable(name = "author") String author) {
+        Book book = bookDao.findById(id);
+        book.setTitle(title);
+        book.setAuthor(author);
+        bookDao.update(book);
+        return "Book updated:\n" + book.toString();
+    }
+
     @RequestMapping("/book/add-sample-book")
     @ResponseBody
     public String addSampleBook() {
@@ -22,6 +47,6 @@ public class BookDaoController {
         book.setTitle("Thinking in Java");
         book.setAuthor("Bruce Eckel");
         bookDao.save(book);
-        return "Sample book added with id: " + book.getId();
+        return "Book added:\n" + book.toString();
     }
 }
