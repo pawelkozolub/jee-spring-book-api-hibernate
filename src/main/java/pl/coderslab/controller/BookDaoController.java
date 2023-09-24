@@ -24,7 +24,7 @@ public class BookDaoController {
 
     @RequestMapping("/book/{id}")
     @ResponseBody
-    public String getBook(@PathVariable(name = "id") Long id) {
+    public String get(@PathVariable(name = "id") Long id) {
         return bookDao.findById(id).toString();
     }
 
@@ -38,6 +38,14 @@ public class BookDaoController {
         book.setAuthor(author);
         bookDao.update(book);
         return "Book updated:\n" + book.toString();
+    }
+
+    @RequestMapping("/book/delete/{id}")
+    @ResponseBody
+    public String delete(@PathVariable(name = "id") Long id) {
+        Book book = bookDao.findById(id);
+        bookDao.delete(book);
+        return "Book deleted:\n" + book.toString();
     }
 
     @RequestMapping("/book/add-sample-book")
