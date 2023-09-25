@@ -10,7 +10,7 @@ import javax.persistence.EntityManagerFactory;
 @Configuration
 public class DbConfig {
 
-    @Bean
+    @Bean(name = "entityManagerFactory")
     public LocalEntityManagerFactoryBean entityManagerFactoryBean() {
         LocalEntityManagerFactoryBean entityManagerFactory = new LocalEntityManagerFactoryBean();
         entityManagerFactory.setPersistenceUnitName("bookstorePersistenceUnit");
@@ -19,7 +19,6 @@ public class DbConfig {
 
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager(entityManagerFactory);
-        return jpaTransactionManager;
+        return new JpaTransactionManager(entityManagerFactory);
     }
 }
