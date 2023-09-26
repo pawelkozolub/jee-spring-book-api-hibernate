@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.model.Book;
 import pl.coderslab.service.BookService;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -58,6 +59,18 @@ public class BookViewController {
             return "/books/edit-view";
         }
         bookService.update(book);
+        return "redirect:/view/book/list";
+    }
+
+    @GetMapping("/show/{id}")
+    public String show(@PathVariable(name = "id") Long id, Model model) {
+        model.addAttribute("book", bookService.get(id).orElseThrow(EntityNotFoundException::new));
+        return "/books/show-view";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteBook(@PathVariable Long id) {
+        bookService.delete(id);
         return "redirect:/view/book/list";
     }
 }
