@@ -32,9 +32,9 @@
                 <td><c:out value="${book.title}"/></td>
                 <td><c:out value="${book.author}"/></td>
                 <td>
+                    <a href="<c:out value="/view/book/show/${book.id}"/>">Show</a>
                     <a href="<c:out value="/view/book/edit/${book.id}"/>">Edit</a>
                     <a href="<c:out value="/view/book/delete/${book.id}"/>">Delete</a>
-                    <a href="<c:out value="/view/book/show/${book.id}"/>">Show</a>
                 </td>
             </tr>
         </c:forEach>
