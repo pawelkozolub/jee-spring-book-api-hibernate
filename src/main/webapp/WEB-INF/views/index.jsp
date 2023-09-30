@@ -9,6 +9,11 @@
     <%--    <style><%@include file="/css/simple.css"%></style>--%>
 </head>
 <body>
-    <h1>Web Application Index Page</h1>
+    <div>
+        <h1>Web Application Index Page</h1>
+        <p>
+            <a href="/view/book/list">Go to book list</a><br/>
+        </p>
+    </div>
 </body>
 </html>
